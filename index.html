@@ -1270,8 +1270,8 @@
       <div style="font-size:3rem;margin-bottom:16px;">✨</div>
       <h3 data-en="Order Placed!" data-ar="تم الطلب!">Order Placed!</h3>
       <p data-en="Thank you! Your order has been received. We will contact you shortly on WhatsApp to confirm delivery details." data-ar="شكراً لكِ! تم استلام طلبك. سنتواصل معك قريباً عبر واتساب لتأكيد تفاصيل التوصيل.">Thank you! Your order has been received. We will contact you shortly on WhatsApp to confirm delivery details.</p>
-      <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px;" data-en="Order confirmation #" data-ar="رقم تأكيد الطلب #">Order confirmation #</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);font-weight:600;" id="orderConfirmNum"></p>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px;" data-en="Your order number" data-ar="رقم طلبك">Your order number</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold);font-weight:600;" id="orderConfirmNum"></p>
       <button class="btn btn-gold" onclick="closeSuccessModal()" style="border-radius:2px;margin-top:16px;" data-en="Continue Shopping" data-ar="تابعي التسوق">Continue Shopping</button>
     </div>
   </div>
@@ -1442,7 +1442,7 @@
     }
 
     function generateOrderId() {
-      return 'MB-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2,5).toUpperCase();
+      return String(10000 + Math.floor(Math.random() * 90000));
     }
 
     function changeQty(delta) {
@@ -1598,7 +1598,7 @@
         document.getElementById('orderNotes').value = '';
 
         closeProductModal();
-        document.getElementById('orderConfirmNum').textContent = orderId;
+        document.getElementById('orderConfirmNum').textContent = '#' + orderId;
         document.getElementById('successModal').classList.add('show');
         document.body.style.overflow = 'hidden';
       } else {
