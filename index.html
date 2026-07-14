@@ -12,8 +12,8 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --deep-green: #1B3A2A;
-      --olive-green: #2D5A3D;
+      --deep-green: #4A5530;
+      --olive-green: #6B7B42;
       --gold: #C5A455;
       --gold-light: #D4BA78;
       --gold-pale: #E8D9AC;
@@ -58,13 +58,13 @@
     /* ─── NAVBAR ─── */
     .navbar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(27,58,42,0.95);
+      background: rgba(74,85,48,0.95);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       transition: background 0.4s, box-shadow 0.4s;
     }
     .navbar.scrolled {
-      background: rgba(27,58,42,0.98);
+      background: rgba(74,85,48,0.98);
       box-shadow: 0 2px 24px rgba(0,0,0,0.15);
     }
     .nav-inner {
@@ -161,7 +161,7 @@
     }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(27,58,42,0.92) 0%, rgba(27,58,42,0.6) 50%, rgba(27,58,42,0.85) 100%);
+      background: linear-gradient(135deg, rgba(74,85,48,0.92) 0%, rgba(74,85,48,0.6) 50%, rgba(74,85,48,0.85) 100%);
     }
     .hero-content {
       position: relative; z-index: 2;
@@ -406,7 +406,7 @@
     .gift-item:hover img { transform: scale(1.08); }
     .gift-item-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(27,58,42,0.85) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(74,85,48,0.85) 0%, transparent 60%);
       display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;
       opacity: 0; transition: opacity 0.4s;
     }
@@ -610,7 +610,7 @@
       .hamburger { display: flex; }
       .nav-links {
         position: fixed; top: 76px; left: 0; right: 0;
-        background: rgba(27,58,42,0.98);
+        background: rgba(74,85,48,0.98);
         flex-direction: column; padding: 32px 24px;
         gap: 20px; transform: translateY(-120%);
         transition: transform 0.4s; z-index: 999;
