@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mera Bio — Shipping Label</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: #f5f0e8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px;
+    }
+    .controls {
+      display: flex; gap: 12px; margin-bottom: 24px;
+    }
+    .controls button {
+      padding: 12px 28px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none; cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    .btn-print {
+      background: #4A5530; color: #C5A455;
+    }
+    .btn-print:hover { background: #3a4425; }
+    .btn-back {
+      background: transparent; color: #4A5530;
+      border: 1.5px solid #4A5530;
+    }
+    .btn-back:hover { background: #4A5530; color: #C5A455; }
+
+    /* ─── LABEL ─── */
+    .label {
+      width: 400px;
+      background: #fff;
+      border: 2px solid #4A5530;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .label-header {
+      background: #4A5530;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .label-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: #C5A455;
+      font-weight: 600;
+    }
+    .label-brand small {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #E8D9AC;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+    .label-order-id {
+      font-size: 0.7rem;
+      color: #E8D9AC;
+      text-align: right;
+      letter-spacing: 0.05em;
+    }
+    .label-order-id strong {
+      display: block;
+      font-size: 0.85rem;
+      color: #C5A455;
+      font-weight: 600;
+    }
+
+    .label-body {
+      padding: 20px 24px;
+    }
+
+    .label-section {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px dashed #d8d0c4;
+    }
+    .label-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .label-section-title {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #4A5530;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .label-key {
+      font-size: 0.75rem;
+      color: #8a8279;
+      font-weight: 400;
+    }
+    .label-val {
+      font-size: 0.8rem;
+      color: #1a1a1a;
+      font-weight: 500;
+      text-align: right;
+      max-width: 60%;
+    }
+    .label-address {
+      font-size: 0.85rem;
+      color: #1a1a1a;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+    .label-product {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: #4A5530;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .label-notes {
+      font-size: 0.78rem;
+      color: #8a8279;
+      font-style: italic;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .label-footer {
+      background: #f8f4ed;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.6rem;
+      color: #8a8279;
+      letter-spacing: 0.1em;
+    }
+    .label-footer strong {
+      color: #4A5530;
+    }
+
+    /* Barcode-style decoration */
+    .label-barcode {
+      display: flex;
+      justify-content: center;
+      gap: 2px;
+      padding: 10px 24px 6px;
+      background: #f8f4ed;
+    }
+    .label-barcode span {
+      display: block;
+      width: 2px;
+      background: #4A5530;
+      opacity: 0.4;
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .controls { display: none; }
+      .label { border: 2px solid #4A5530; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="controls">
+    <button class="btn-print" onclick="window.print()">🖨️ Print Label</button>
+    <button class="btn-back" onclick="window.close()">Close</button>
+  </div>
+
+  <div class="label" id="label">
+    <div class="label-header">
+      <div class="label-brand">
+        Mera Bio
+        <small>Natural Beauty</small>
+      </div>
+      <div class="label-order-id">
+        Order
+        <strong id="lblOrderId">—</strong>
+      </div>
+    </div>
+
+    <div class="label-body">
+      <div class="label-section">
+        <div class="label-section-title">📍 Ship To</div>
+        <div class="label-address" id="lblName"></div>
+        <div class="label-address" id="lblAddress"></div>
+        <div style="margin-top:8px;">
+          <div class="label-row">
+            <span class="label-key">Phone</span>
+            <span class="label-val" id="lblPhone"></span>
+          </div>
+          <div class="label-row">
+            <span class="label-key">Email</span>
+            <span class="label-val" id="lblEmail"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="label-section">
+        <div class="label-section-title">📦 Order Details</div>
+        <div class="label-product" id="lblProduct"></div>
+        <div class="label-row">
+          <span class="label-key">Quantity</span>
+          <span class="label-val" id="lblQty"></span>
+        </div>
+        <div class="label-row">
+          <span class="label-key">Price</span>
+          <span class="label-val" id="lblPrice"></span>
+        </div>
+        <div class="label-row">
+          <span class="label-key">Date</span>
+          <span class="label-val" id="lblDate"></span>
+        </div>
+        <div class="label-notes" id="lblNotes"></div>
+      </div>
+
+      <div class="label-section">
+        <div class="label-section-title">📤 Ship From</div>
+        <div class="label-address">Mera Bio Natural Beauty</div>
+        <div style="margin-top:4px;">
+          <div class="label-row">
+            <span class="label-key">Phone</span>
+            <span class="label-val">+971 50 603 7471</span>
+          </div>
+          <div class="label-row">
+            <span class="label-key">Instagram</span>
+            <span class="label-val">@mera_bio369</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="label-barcode" id="barcode"></div>
+
+    <div class="label-footer">
+      <strong>mera bio</strong> — natural beauty &nbsp;|&nbsp; handcrafted in morocco &nbsp;|&nbsp; 100% natural
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    document.getElementById('lblOrderId').textContent = params.get('id') || '—';
+    document.getElementById('lblName').textContent = params.get('name') || '—';
+    document.getElementById('lblPhone').textContent = params.get('phone') || '—';
+    document.getElementById('lblEmail').textContent = params.get('email') || 'N/A';
+    document.getElementById('lblAddress').textContent = params.get('address') || '—';
+    document.getElementById('lblProduct').textContent = params.get('product') || '—';
+    document.getElementById('lblQty').textContent = params.get('qty') || '1';
+    document.getElementById('lblPrice').textContent = params.get('price') || '—';
+    document.getElementById('lblDate').textContent = params.get('date') || '—';
+
+    const notes = params.get('notes');
+    const notesEl = document.getElementById('lblNotes');
+    if (notes) {
+      notesEl.textContent = '📝 ' + notes;
+    } else {
+      notesEl.style.display = 'none';
+    }
+
+    // Generate decorative barcode from order ID
+    const barcode = document.getElementById('barcode');
+    const orderId = params.get('id') || 'MB-000';
+    for (let i = 0; i < 60; i++) {
+      const bar = document.createElement('span');
+      const charCode = orderId.charCodeAt(i % orderId.length) || 65;
+      bar.style.height = (8 + (charCode % 20)) + 'px';
+      bar.style.width = (charCode % 3 === 0 ? 3 : 1.5) + 'px';
+      barcode.appendChild(bar);
+    }
+  </script>
+
+</body>
+</html>

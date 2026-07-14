@@ -1132,10 +1132,10 @@
           </a>
           <p data-en="Natural beauty inspired by Moroccan heritage. Handcrafted skincare that nourishes your body, soul, and the world around you." data-ar="جمال طبيعي مستوحى من التراث المغربي. عناية يدوية الصنع تغذي جسمك وروحك والعالم من حولك.">Natural beauty inspired by Moroccan heritage. Handcrafted skincare that nourishes your body, soul, and the world around you.</p>
           <div class="footer-socials">
-            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+            <a href="https://instagram.com/mera_bio369" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
             <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">fb</a>
             <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok">tk</a>
-            <a href="https://wa.me/" target="_blank" rel="noopener" aria-label="WhatsApp">wa</a>
+            <a href="https://wa.me/971506037471" target="_blank" rel="noopener" aria-label="WhatsApp">wa</a>
           </div>
         </div>
         <div class="footer-col">
@@ -1200,11 +1200,34 @@
       <p id="productModalDesc"></p>
       <p class="modal-price" id="productModalPrice"></p>
       <div class="modal-form">
-        <input type="text" data-placeholder-en="Your Name" data-placeholder-ar="اسمك" placeholder="Your Name">
-        <input type="email" data-placeholder-en="Your Email" data-placeholder-ar="بريدك الإلكتروني" placeholder="Your Email">
-        <input type="tel" data-placeholder-en="Phone / WhatsApp" data-placeholder-ar="الهاتف / واتساب" placeholder="Phone / WhatsApp">
-        <button class="btn btn-gold" onclick="handleOrder()" style="border-radius:2px;" data-en="Order via WhatsApp" data-ar="اطلبي عبر واتساب">Order via WhatsApp</button>
+        <input type="text" id="orderName" data-placeholder-en="Full Name" data-placeholder-ar="الاسم الكامل" placeholder="Full Name" required>
+        <input type="tel" id="orderPhone" data-placeholder-en="Phone / WhatsApp" data-placeholder-ar="الهاتف / واتساب" placeholder="Phone / WhatsApp" required>
+        <input type="email" id="orderEmail" data-placeholder-en="Email (optional)" data-placeholder-ar="البريد الإلكتروني (اختياري)" placeholder="Email (optional)">
+        <input type="text" id="orderAddress" data-placeholder-en="Delivery Address (City, Area, Building)" data-placeholder-ar="عنوان التوصيل (المدينة، المنطقة، المبنى)" placeholder="Delivery Address (City, Area, Building)" required>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <label style="font-size:0.85rem;color:var(--text-muted);white-space:nowrap;" data-en="Quantity:" data-ar="الكمية:">Quantity:</label>
+          <div style="display:flex;align-items:center;gap:0;">
+            <button type="button" onclick="changeQty(-1)" style="width:36px;height:36px;border:1.5px solid var(--cream-dark);background:var(--white);font-size:1.1rem;cursor:pointer;border-radius:2px 0 0 2px;">−</button>
+            <input type="number" id="orderQty" value="1" min="1" max="99" style="width:50px;height:36px;text-align:center;border:1.5px solid var(--cream-dark);border-left:0;border-right:0;font-family:'Jost',sans-serif;font-size:0.95rem;outline:none;">
+            <button type="button" onclick="changeQty(1)" style="width:36px;height:36px;border:1.5px solid var(--cream-dark);background:var(--white);font-size:1.1rem;cursor:pointer;border-radius:0 2px 2px 0;">+</button>
+          </div>
+        </div>
+        <textarea id="orderNotes" rows="2" data-placeholder-en="Order notes (optional)" data-placeholder-ar="ملاحظات الطلب (اختياري)" placeholder="Order notes (optional)"></textarea>
+        <button class="btn btn-gold" onclick="handleOrder()" style="border-radius:2px;" data-en="Place Order" data-ar="أرسلي الطلب">Place Order</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ════════ ORDER SUCCESS MODAL ════════ -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal" style="text-align:center;">
+      <button class="modal-close" onclick="closeSuccessModal()">&times;</button>
+      <div style="font-size:3rem;margin-bottom:16px;">✨</div>
+      <h3 data-en="Order Placed!" data-ar="تم الطلب!">Order Placed!</h3>
+      <p data-en="Thank you! Your order has been received. We will contact you shortly on WhatsApp to confirm delivery details." data-ar="شكراً لكِ! تم استلام طلبك. سنتواصل معك قريباً عبر واتساب لتأكيد تفاصيل التوصيل.">Thank you! Your order has been received. We will contact you shortly on WhatsApp to confirm delivery details.</p>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px;" data-en="Order confirmation #" data-ar="رقم تأكيد الطلب #">Order confirmation #</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);font-weight:600;" id="orderConfirmNum"></p>
+      <button class="btn btn-gold" onclick="closeSuccessModal()" style="border-radius:2px;margin-top:16px;" data-en="Continue Shopping" data-ar="تابعي التسوق">Continue Shopping</button>
     </div>
   </div>
 
@@ -1351,11 +1374,40 @@
     });
 
     // ═══════════════════════════════════
+    // TELEGRAM CONFIG
+    // ═══════════════════════════════════
+    const TG_TOKEN = 'YOUR_BOT_TOKEN_HERE'; // ← PASTE YOUR BOT TOKEN HERE
+    const TG_CHAT = '5923606532';
+
+    async function sendTelegram(text) {
+      try {
+        await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: TG_CHAT, text: text, parse_mode: 'HTML' })
+        });
+        return true;
+      } catch (e) { console.error('Telegram error:', e); return false; }
+    }
+
+    function generateOrderId() {
+      return 'MB-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2,5).toUpperCase();
+    }
+
+    function changeQty(delta) {
+      const input = document.getElementById('orderQty');
+      let val = parseInt(input.value) || 1;
+      val = Math.max(1, Math.min(99, val + delta));
+      input.value = val;
+    }
+
+    // ═══════════════════════════════════
     // FORM HANDLERS
     // ═══════════════════════════════════
     function handleNewsletter() {
       const input = document.getElementById('newsletterInput');
       if (input.value && input.value.includes('@')) {
+        sendTelegram(`📩 <b>New Subscriber</b>\n${input.value}`);
         const msg = currentLang === 'ar'
           ? 'شكراً لاشتراكك في ميرا بيو! ✨'
           : 'Thank you for subscribing to Mera Bio! ✨';
@@ -1370,6 +1422,22 @@
     }
 
     function handleContact() {
+      const modal = document.getElementById('contactModal');
+      const inputs = modal.querySelectorAll('input, textarea');
+      const name = inputs[0].value.trim();
+      const email = inputs[1].value.trim();
+      const phone = inputs[2].value.trim();
+      const message = inputs[3].value.trim();
+
+      if (!name || !message) {
+        alert(currentLang === 'ar' ? 'يرجى ملء الاسم والرسالة.' : 'Please fill in your name and message.');
+        return;
+      }
+
+      const text = `💬 <b>New Contact Message</b>\n\n👤 <b>Name:</b> ${name}\n📧 <b>Email:</b> ${email || 'N/A'}\n📱 <b>Phone:</b> ${phone || 'N/A'}\n\n📝 <b>Message:</b>\n${message}`;
+      sendTelegram(text);
+
+      inputs.forEach(i => i.value = '');
       const msg = currentLang === 'ar'
         ? 'شكراً لرسالتك! سيتواصل فريقنا معك خلال ٢٤ ساعة. ✨'
         : 'Thank you for your message! Our team will get back to you within 24 hours. ✨';
@@ -1377,11 +1445,67 @@
       closeContactModal();
     }
 
-    function handleOrder() {
-      const name = document.getElementById('productModalTitle').textContent;
-      const msg = encodeURIComponent('Hi! I would like to order: ' + name);
-      window.open('https://wa.me/?text=' + msg, '_blank');
-      closeProductModal();
+    async function handleOrder() {
+      const name = document.getElementById('orderName').value.trim();
+      const phone = document.getElementById('orderPhone').value.trim();
+      const email = document.getElementById('orderEmail').value.trim();
+      const address = document.getElementById('orderAddress').value.trim();
+      const qty = document.getElementById('orderQty').value;
+      const notes = document.getElementById('orderNotes').value.trim();
+      const product = document.getElementById('productModalTitle').textContent;
+      const price = document.getElementById('productModalPrice').textContent;
+
+      if (!name || !phone || !address) {
+        alert(currentLang === 'ar' ? 'يرجى ملء الاسم والهاتف والعنوان.' : 'Please fill in name, phone, and address.');
+        return;
+      }
+
+      const orderId = generateOrderId();
+      const date = new Date().toLocaleString('en-AE', { dateStyle: 'medium', timeStyle: 'short' });
+
+      // Build label URL
+      const labelParams = new URLSearchParams({
+        id: orderId, name, phone, email, address, product, qty, price, notes, date
+      });
+      const labelUrl = `https://mywebsiite.github.io/MeraBio/label.html?${labelParams.toString()}`;
+
+      // Telegram message
+      const text = `🛍️ <b>NEW ORDER #${orderId}</b>\n` +
+        `━━━━━━━━━━━━━━━━\n` +
+        `📅 <b>Date:</b> ${date}\n\n` +
+        `📦 <b>Product:</b> ${product}\n` +
+        `🔢 <b>Qty:</b> ${qty}\n` +
+        `💰 <b>Price:</b> ${price}\n\n` +
+        `👤 <b>Customer:</b> ${name}\n` +
+        `📱 <b>Phone:</b> ${phone}\n` +
+        `📧 <b>Email:</b> ${email || 'N/A'}\n` +
+        `📍 <b>Address:</b> ${address}\n` +
+        `${notes ? '\n📝 <b>Notes:</b> ' + notes : ''}\n\n` +
+        `🏷️ <a href="${labelUrl}">📥 Download Shipping Label</a>`;
+
+      const sent = await sendTelegram(text);
+
+      if (sent) {
+        // Clear form
+        document.getElementById('orderName').value = '';
+        document.getElementById('orderPhone').value = '';
+        document.getElementById('orderEmail').value = '';
+        document.getElementById('orderAddress').value = '';
+        document.getElementById('orderQty').value = '1';
+        document.getElementById('orderNotes').value = '';
+
+        closeProductModal();
+        document.getElementById('orderConfirmNum').textContent = orderId;
+        document.getElementById('successModal').classList.add('show');
+        document.body.style.overflow = 'hidden';
+      } else {
+        alert(currentLang === 'ar' ? 'حدث خطأ. يرجى المحاولة مرة أخرى.' : 'Something went wrong. Please try again.');
+      }
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('successModal').classList.remove('show');
+      document.body.style.overflow = '';
     }
   </script>
 
