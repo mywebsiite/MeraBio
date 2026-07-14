@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mera Bio — Natural Beauty</title>
+  <meta name="description" content="Mera Bio Natural Beauty — Luxury Moroccan-inspired skincare crafted from pure botanicals, argan oil, and rose essentials.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --deep-green: #1B3A2A;
+      --olive-green: #2D5A3D;
+      --gold: #C5A455;
+      --gold-light: #D4BA78;
+      --gold-pale: #E8D9AC;
+      --cream: #FAF6EF;
+      --cream-dark: #F0E8D8;
+      --rose: #C4727F;
+      --text-dark: #1A1A1A;
+      --text-muted: #6B6356;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      color: var(--text-dark);
+      background: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── UTILITY ─── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; clip: rect(0,0,0,0); overflow: hidden; }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(27,58,42,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    .navbar.scrolled {
+      background: rgba(27,58,42,0.98);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.15);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px; max-width: 1280px; margin: 0 auto;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--gold);
+    }
+    .nav-logo img {
+      width: 44px; height: 44px; border-radius: 50%;
+      object-fit: cover; border: 1.5px solid var(--gold);
+    }
+    .nav-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex; gap: 32px; list-style: none; align-items: center;
+    }
+    .nav-links a {
+      color: var(--gold-pale); text-decoration: none;
+      font-size: 0.85rem; font-weight: 400; letter-spacing: 0.12em;
+      text-transform: uppercase; transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--gold) !important; color: var(--deep-green) !important;
+      padding: 10px 24px; border-radius: 2px;
+      font-weight: 500 !important; letter-spacing: 0.1em !important;
+      transition: background 0.3s, transform 0.3s !important;
+    }
+    .nav-cta:hover {
+      background: var(--gold-light) !important;
+      transform: translateY(-1px);
+    }
+    .nav-cta::after { display: none !important; }
+
+    /* Mobile hamburger */
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 5px; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--gold); transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      background: var(--deep-green);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+    }
+    .hero-bg img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.35; filter: brightness(0.7);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(27,58,42,0.92) 0%, rgba(27,58,42,0.6) 50%, rgba(27,58,42,0.85) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto;
+      padding: 140px 24px 80px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .hero-text {}
+    .hero-eyebrow {
+      font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px; font-weight: 400;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 300; line-height: 1.1;
+      color: var(--cream);
+      margin-bottom: 24px;
+    }
+    .hero-title em {
+      font-style: italic; color: var(--gold);
+      font-weight: 400;
+    }
+    .hero-desc {
+      font-size: 1.05rem; line-height: 1.8;
+      color: var(--gold-pale); max-width: 480px;
+      margin-bottom: 40px; font-weight: 300;
+    }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 14px 36px;
+      text-decoration: none; font-size: 0.8rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 500; transition: all 0.3s; cursor: pointer;
+      border: none; font-family: 'Jost', sans-serif;
+    }
+    .btn-gold {
+      background: var(--gold); color: var(--deep-green);
+      border: 1.5px solid var(--gold);
+    }
+    .btn-gold:hover {
+      background: transparent; color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(197,164,85,0.2);
+    }
+    .btn-outline {
+      background: transparent; color: var(--gold);
+      border: 1.5px solid var(--gold);
+    }
+    .btn-outline:hover {
+      background: var(--gold); color: var(--deep-green);
+      transform: translateY(-2px);
+    }
+    .hero-image {
+      display: flex; justify-content: center; align-items: center;
+    }
+    .hero-image img {
+      width: 100%; max-width: 500px;
+      border-radius: 4px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+    }
+    .hero-scroll-hint {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      z-index: 3; color: var(--gold-pale);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      animation: float 2.5s ease-in-out infinite;
+    }
+    .hero-scroll-hint svg { width: 20px; height: 20px; }
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee {
+      background: var(--gold);
+      padding: 14px 0; overflow: hidden; white-space: nowrap;
+    }
+    .marquee-inner {
+      display: inline-flex; animation: scroll 25s linear infinite;
+    }
+    .marquee-item {
+      font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--deep-green); padding: 0 40px; font-weight: 500;
+    }
+    .marquee-item::before {
+      content: '✦'; margin-right: 40px; opacity: 0.5;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── ABOUT ─── */
+    .about {
+      padding: 120px 0; background: var(--cream);
+    }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .about-images {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .about-images img {
+      width: 100%; border-radius: 4px; object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .about-images img:hover { transform: scale(1.03); }
+    .about-images img:first-child {
+      grid-row: span 2; height: 100%;
+    }
+    .section-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px; font-weight: 500;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300; line-height: 1.2;
+      color: var(--deep-green); margin-bottom: 24px;
+    }
+    .section-title em {
+      font-style: italic; color: var(--gold); font-weight: 400;
+    }
+    .section-desc {
+      font-size: 0.95rem; line-height: 1.9;
+      color: var(--text-muted); margin-bottom: 20px; font-weight: 300;
+    }
+    .about-features {
+      display: flex; gap: 32px; margin-top: 36px; flex-wrap: wrap;
+    }
+    .about-feature {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .about-feature-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--deep-green); display: flex;
+      align-items: center; justify-content: center;
+      color: var(--gold); font-size: 0.9rem; flex-shrink: 0;
+    }
+    .about-feature span {
+      font-size: 0.82rem; letter-spacing: 0.05em;
+      color: var(--text-muted); font-weight: 400;
+    }
+
+    /* ─── PRODUCTS ─── */
+    .products {
+      padding: 120px 0; background: var(--deep-green);
+      position: relative;
+    }
+    .products .section-eyebrow { color: var(--gold-pale); }
+    .products .section-title { color: var(--cream); }
+    .products .section-desc { color: var(--gold-pale); max-width: 560px; }
+    .products-header {
+      text-align: center; margin-bottom: 64px;
+    }
+
+    /* Tab navigation */
+    .product-tabs {
+      display: flex; justify-content: center; gap: 8px;
+      margin-bottom: 56px; flex-wrap: wrap;
+    }
+    .product-tab {
+      padding: 12px 28px; background: transparent;
+      border: 1px solid rgba(197,164,85,0.3);
+      color: var(--gold-pale); cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.15em;
+      text-transform: uppercase; transition: all 0.3s;
+      border-radius: 2px;
+    }
+    .product-tab:hover,
+    .product-tab.active {
+      background: var(--gold); color: var(--deep-green);
+      border-color: var(--gold);
+    }
+
+    .product-panel { display: none; }
+    .product-panel.active { display: block; }
+
+    .product-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .product-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(197,164,85,0.15);
+      border-radius: 4px; overflow: hidden;
+      transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+      border-color: var(--gold);
+    }
+    .product-card-img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .product-card:hover .product-card-img { transform: scale(1.05); }
+    .product-card-body { padding: 24px; }
+    .product-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 500;
+      color: var(--cream); margin-bottom: 8px;
+    }
+    .product-card-desc {
+      font-size: 0.85rem; color: var(--gold-pale);
+      line-height: 1.6; margin-bottom: 16px; font-weight: 300;
+    }
+    .product-card-footer {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .product-card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; color: var(--gold); font-weight: 600;
+    }
+    .product-card-btn {
+      padding: 8px 20px; font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: var(--gold); color: var(--deep-green);
+      border: 1px solid var(--gold); cursor: pointer;
+      font-family: 'Jost', sans-serif; transition: all 0.3s;
+      border-radius: 2px; text-decoration: none;
+    }
+    .product-card-btn:hover {
+      background: transparent; color: var(--gold);
+    }
+
+    /* ─── RITUAL SECTION ─── */
+    .ritual {
+      padding: 120px 0;
+      background: var(--cream);
+    }
+    .ritual-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .ritual-steps { display: flex; flex-direction: column; gap: 36px; }
+    .ritual-step {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 24px; border-radius: 4px;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .ritual-step:hover { background: var(--cream-dark); }
+    .ritual-step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300;
+      color: var(--gold); line-height: 1; min-width: 40px;
+    }
+    .ritual-step h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 500;
+      color: var(--deep-green); margin-bottom: 6px;
+    }
+    .ritual-step p {
+      font-size: 0.88rem; color: var(--text-muted);
+      line-height: 1.7; font-weight: 300;
+    }
+    .ritual-image img {
+      width: 100%; border-radius: 4px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.1);
+    }
+
+    /* ─── GIFT SETS ─── */
+    .gifts {
+      padding: 120px 0;
+      background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);
+    }
+    .gifts-header { text-align: center; margin-bottom: 64px; }
+    .gifts-gallery {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .gift-item {
+      position: relative; overflow: hidden; border-radius: 4px;
+      cursor: pointer; aspect-ratio: 1;
+    }
+    .gift-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .gift-item:hover img { transform: scale(1.08); }
+    .gift-item-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(27,58,42,0.85) 0%, transparent 60%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 28px;
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .gift-item:hover .gift-item-overlay { opacity: 1; }
+    .gift-item-overlay h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; color: var(--cream); font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .gift-item-overlay p {
+      font-size: 0.8rem; color: var(--gold-pale); font-weight: 300;
+    }
+    .gift-item-overlay .btn {
+      margin-top: 12px; padding: 8px 20px;
+      font-size: 0.7rem; align-self: flex-start;
+    }
+
+    /* ─── INGREDIENTS ─── */
+    .ingredients {
+      padding: 120px 0; background: var(--deep-green);
+    }
+    .ingredients-header { text-align: center; margin-bottom: 64px; }
+    .ingredients .section-title { color: var(--cream); }
+    .ingredients .section-eyebrow { color: var(--gold); }
+    .ingredients .section-desc { color: var(--gold-pale); max-width: 560px; margin: 0 auto; }
+    .ingredients-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .ingredient-card {
+      text-align: center; padding: 40px 24px;
+      border: 1px solid rgba(197,164,85,0.15);
+      border-radius: 4px; transition: all 0.4s;
+      cursor: default;
+    }
+    .ingredient-card:hover {
+      border-color: var(--gold);
+      background: rgba(197,164,85,0.05);
+      transform: translateY(-4px);
+    }
+    .ingredient-icon {
+      font-size: 2.5rem; margin-bottom: 16px;
+      display: block;
+    }
+    .ingredient-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; color: var(--gold); font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .ingredient-card p {
+      font-size: 0.82rem; color: var(--gold-pale);
+      line-height: 1.7; font-weight: 300;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      padding: 120px 0; background: var(--cream);
+    }
+    .testimonials-header { text-align: center; margin-bottom: 64px; }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .testimonial-card {
+      padding: 40px 32px;
+      background: var(--white);
+      border: 1px solid var(--cream-dark);
+      border-radius: 4px; transition: all 0.3s;
+    }
+    .testimonial-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+      border-color: var(--gold-pale);
+    }
+    .testimonial-stars {
+      color: var(--gold); font-size: 0.9rem;
+      letter-spacing: 4px; margin-bottom: 20px;
+    }
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-style: italic;
+      color: var(--text-dark); line-height: 1.7;
+      margin-bottom: 24px; font-weight: 400;
+    }
+    .testimonial-author {
+      font-size: 0.82rem; color: var(--text-muted);
+      letter-spacing: 0.08em; font-weight: 500;
+    }
+    .testimonial-author span {
+      color: var(--gold); font-weight: 400;
+    }
+
+    /* ─── NEWSLETTER ─── */
+    .newsletter {
+      padding: 100px 0;
+      background: var(--gold);
+      text-align: center;
+    }
+    .newsletter .section-title { color: var(--deep-green); }
+    .newsletter .section-desc { color: var(--olive-green); max-width: 500px; margin: 0 auto 32px; }
+    .newsletter-form {
+      display: flex; gap: 12px;
+      max-width: 480px; margin: 0 auto;
+    }
+    .newsletter-input {
+      flex: 1; padding: 14px 20px;
+      border: 1.5px solid var(--deep-green);
+      background: transparent; color: var(--deep-green);
+      font-family: 'Jost', sans-serif; font-size: 0.9rem;
+      border-radius: 2px; outline: none;
+      transition: border-color 0.3s;
+    }
+    .newsletter-input::placeholder { color: var(--olive-green); opacity: 0.7; }
+    .newsletter-input:focus { border-color: var(--deep-green); }
+    .newsletter-btn {
+      padding: 14px 32px; background: var(--deep-green);
+      color: var(--gold); border: 1.5px solid var(--deep-green);
+      font-family: 'Jost', sans-serif; font-size: 0.78rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      cursor: pointer; transition: all 0.3s; border-radius: 2px;
+      font-weight: 500;
+    }
+    .newsletter-btn:hover {
+      background: transparent; color: var(--deep-green);
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--deep-green);
+      padding: 80px 0 0;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 60px;
+      border-bottom: 1px solid rgba(197,164,85,0.15);
+    }
+    .footer-brand {}
+    .footer-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .footer-logo img {
+      width: 48px; height: 48px; border-radius: 50%;
+      object-fit: cover; border: 1.5px solid var(--gold);
+    }
+    .footer-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 600;
+    }
+    .footer-brand p {
+      font-size: 0.88rem; color: var(--gold-pale);
+      line-height: 1.8; font-weight: 300;
+      max-width: 320px; margin-bottom: 24px;
+    }
+    .footer-socials {
+      display: flex; gap: 12px;
+    }
+    .footer-socials a {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid rgba(197,164,85,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold-pale); text-decoration: none;
+      font-size: 0.85rem; transition: all 0.3s;
+    }
+    .footer-socials a:hover {
+      background: var(--gold); color: var(--deep-green);
+      border-color: var(--gold);
+    }
+    .footer-col h5 {
+      font-size: 0.72rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 20px; font-weight: 500;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a {
+      text-decoration: none; color: var(--gold-pale);
+      font-size: 0.88rem; font-weight: 300;
+      transition: color 0.3s;
+    }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      padding: 24px 0;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p {
+      font-size: 0.78rem; color: rgba(232,217,172,0.5);
+      font-weight: 300;
+    }
+    .footer-bottom a {
+      color: rgba(232,217,172,0.5); text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      display: none; align-items: center; justify-content: center;
+      padding: 24px; opacity: 0; transition: opacity 0.3s;
+    }
+    .modal-overlay.show { display: flex; opacity: 1; }
+    .modal {
+      background: var(--cream); max-width: 520px; width: 100%;
+      border-radius: 4px; padding: 48px 40px;
+      position: relative; text-align: center;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: none; border: none; font-size: 1.5rem;
+      cursor: pointer; color: var(--text-muted);
+      transition: color 0.3s;
+    }
+    .modal-close:hover { color: var(--text-dark); }
+    .modal h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; color: var(--deep-green);
+      margin-bottom: 12px; font-weight: 500;
+    }
+    .modal p {
+      font-size: 0.9rem; color: var(--text-muted);
+      line-height: 1.7; margin-bottom: 28px;
+    }
+    .modal-form { display: flex; flex-direction: column; gap: 14px; }
+    .modal-form input,
+    .modal-form textarea {
+      padding: 14px 18px; border: 1.5px solid var(--cream-dark);
+      background: var(--white); font-family: 'Jost', sans-serif;
+      font-size: 0.9rem; border-radius: 2px;
+      outline: none; transition: border-color 0.3s;
+      color: var(--text-dark);
+    }
+    .modal-form input:focus,
+    .modal-form textarea:focus { border-color: var(--gold); }
+    .modal-form textarea { resize: vertical; min-height: 100px; }
+    .modal-form .btn { width: 100%; text-align: center; }
+
+    /* ─── BACK TO TOP ─── */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--gold); color: var(--deep-green);
+      border: none; cursor: pointer; font-size: 1.2rem;
+      display: none; align-items: center; justify-content: center;
+      transition: all 0.3s; z-index: 999;
+      box-shadow: 0 4px 16px rgba(197,164,85,0.3);
+    }
+    .back-to-top.show { display: flex; }
+    .back-to-top:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(197,164,85,0.4);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; }
+      .hero-desc { margin: 0 auto 40px; }
+      .hero-buttons { justify-content: center; }
+      .hero-image { order: -1; }
+      .hero-image img { max-width: 400px; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .ritual-grid { grid-template-columns: 1fr; gap: 48px; }
+      .ritual-image { order: -1; }
+      .ingredients-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        position: fixed; top: 76px; left: 0; right: 0;
+        background: rgba(27,58,42,0.98);
+        flex-direction: column; padding: 32px 24px;
+        gap: 20px; transform: translateY(-120%);
+        transition: transform 0.4s; z-index: 999;
+      }
+      .nav-links.open { transform: translateY(0); }
+      .gifts-gallery { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .product-grid { grid-template-columns: 1fr; }
+      .about-features { flex-direction: column; }
+      .ingredients-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .gifts-gallery { grid-template-columns: 1fr; }
+      .hero-image img { max-width: 100%; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .fade-up { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════ NAVBAR ════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="images/logo.jpeg" alt="Mera Bio logo">
+        <span class="nav-logo-text">Mera Bio</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#ritual">Rituals</a></li>
+        <li><a href="#gifts">Gifts</a></li>
+        <li><a href="#ingredients">Ingredients</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <img src="images/gift-set-palace.jpeg" alt="Mera Bio luxury gift set">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Soft Rituals for Everyday Magic</p>
+        <h1 class="hero-title">Nature's <em>Purest</em><br>Beauty Secrets</h1>
+        <p class="hero-desc">Born in Morocco, crafted with love. Mera Bio brings you luxury natural skincare infused with argan oil, rose petals, and centuries-old botanical wisdom.</p>
+        <div class="hero-buttons">
+          <a href="#products" class="btn btn-gold">Explore Collection</a>
+          <a href="#about" class="btn btn-outline">Our Story</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="images/botanical-oil.jpeg" alt="Mera Bio Natural Oil with botanicals and crystals">
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- ════════ MARQUEE ════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item">100% Natural</span>
+      <span class="marquee-item">Moroccan Heritage</span>
+      <span class="marquee-item">Argan Oil</span>
+      <span class="marquee-item">Rose Botanicals</span>
+      <span class="marquee-item">Cruelty Free</span>
+      <span class="marquee-item">Handcrafted</span>
+      <span class="marquee-item">Vegan Friendly</span>
+      <span class="marquee-item">Eco Packaging</span>
+      <span class="marquee-item">100% Natural</span>
+      <span class="marquee-item">Moroccan Heritage</span>
+      <span class="marquee-item">Argan Oil</span>
+      <span class="marquee-item">Rose Botanicals</span>
+      <span class="marquee-item">Cruelty Free</span>
+      <span class="marquee-item">Handcrafted</span>
+      <span class="marquee-item">Vegan Friendly</span>
+      <span class="marquee-item">Eco Packaging</span>
+    </div>
+  </div>
+
+  <!-- ════════ ABOUT ════════ -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-images fade-up">
+          <img src="images/model-hair-oil.jpeg" alt="Model using Mera Bio hair oil">
+          <img src="images/hair-oil-roses.jpeg" alt="Mera Bio hair oil with roses">
+          <img src="images/hair-oil-closeup.jpeg" alt="Mera Bio hair oil close-up">
+        </div>
+        <div class="fade-up">
+          <p class="section-eyebrow">Our Story</p>
+          <h2 class="section-title">Where <em>Tradition</em><br>Meets Beauty</h2>
+          <p class="section-desc">Mera Bio was born from a deep love for Moroccan beauty traditions — the hammams, the rose gardens, the argan groves that have nourished skin for generations. Every product is a bridge between ancestral wisdom and modern self-care.</p>
+          <p class="section-desc">We source our ingredients directly from Moroccan cooperatives, ensuring the highest quality while supporting the women who have preserved these traditions for centuries.</p>
+          <div class="about-features">
+            <div class="about-feature">
+              <div class="about-feature-icon">✦</div>
+              <span>100% Natural<br>Ingredients</span>
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-icon">♡</div>
+              <span>Cruelty Free<br>& Vegan</span>
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-icon">✿</div>
+              <span>Sustainably<br>Sourced</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PRODUCTS ════════ -->
+  <section class="products" id="products">
+    <div class="container">
+      <div class="products-header fade-up">
+        <p class="section-eyebrow">The Collection</p>
+        <h2 class="section-title">Discover Our <em>Treasures</em></h2>
+        <p class="section-desc">Each product is a ritual — carefully formulated with pure botanicals, cold-pressed oils, and nature's finest essentials.</p>
+      </div>
+
+      <div class="product-tabs fade-up">
+        <button class="product-tab active" data-tab="hair-oils">Hair Oils</button>
+        <button class="product-tab" data-tab="body-scrubs">Body Scrubs</button>
+        <button class="product-tab" data-tab="bath-salts">Bath Salts</button>
+        <button class="product-tab" data-tab="botanicals">Botanical Oils</button>
+      </div>
+
+      <!-- Hair Oils -->
+      <div class="product-panel active" id="panel-hair-oils">
+        <div class="product-grid">
+          <div class="product-card fade-up" onclick="openProductModal('Huile Cheveux — Argan Hair Oil','A luxurious blend of pure argan oil enriched with rose and botanical extracts to deeply nourish and restore shine to your hair.','AED 149')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/hair-oil-argan.jpeg" alt="Argan Hair Oil"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Huile Cheveux — Argan</h3>
+              <p class="product-card-desc">Pure argan oil infused with rose petals for deep nourishment and radiant shine.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 149</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card fade-up" onclick="openProductModal('Huile Cheveux — Rosemary & Argan','Stimulating rosemary combined with nourishing argan oil to strengthen hair and promote healthy growth.','AED 149')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/hair-oil-roses.jpeg" alt="Rosemary Argan Hair Oil"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Huile Cheveux — Rosemary</h3>
+              <p class="product-card-desc">Stimulating rosemary and argan oil to strengthen hair and encourage healthy growth.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 149</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card fade-up" onclick="openProductModal('Huile Cheveux — Lavender Night Oil','Calming lavender argan hair oil for overnight deep conditioning and relaxation.','AED 149')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/hair-oil-closeup.jpeg" alt="Lavender Hair Oil"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Huile Cheveux — Lavender</h3>
+              <p class="product-card-desc">A calming lavender-infused argan oil for overnight deep conditioning and relaxation.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 149</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body Scrubs -->
+      <div class="product-panel" id="panel-body-scrubs">
+        <div class="product-grid">
+          <div class="product-card fade-up" onclick="openProductModal('Rose & Hibiscus Body Scrub','A gentle exfoliating scrub infused with real rose petals and hibiscus to reveal soft, glowing skin. 340 ml.','AED 120')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/body-scrubs.jpeg" alt="Rose Hibiscus Body Scrub"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Rose & Hibiscus</h3>
+              <p class="product-card-desc">Gentle exfoliation with real rose petals and hibiscus for soft, glowing skin.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 120</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card fade-up" onclick="openProductModal('Lemon Body Scrub','Bright citrus exfoliant enriched with lemon zest and natural oils for energized, smooth skin. 340 ml.','AED 120')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/body-scrubs.jpeg" alt="Lemon Body Scrub"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Lemon Zest</h3>
+              <p class="product-card-desc">Bright citrus exfoliant with lemon zest and natural oils for energized, smooth skin.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 120</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card fade-up" onclick="openProductModal('Blue Nila Body Scrub','Infused with traditional Moroccan blue nila for a detoxifying and purifying skin ritual. 340 ml.','AED 120')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/body-scrubs.jpeg" alt="Blue Nila Body Scrub"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Blue Nila</h3>
+              <p class="product-card-desc">Traditional Moroccan blue nila for a deeply detoxifying and purifying skin ritual.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 120</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card fade-up" onclick="openProductModal('Argan & Vanilla Body Scrub','Rich argan and warm vanilla body scrub for intense nourishment and silky soft skin. 340 ml.','AED 120')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/hero-gift-set.jpeg" alt="Argan Vanilla Body Scrub"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Argan & Vanilla</h3>
+              <p class="product-card-desc">Rich argan and warm vanilla for intense nourishment and silky soft skin.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 120</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bath Salts -->
+      <div class="product-panel" id="panel-bath-salts">
+        <div class="product-grid">
+          <div class="product-card fade-up" onclick="openProductModal('Rose Blossom Bath Salt','Soothing bath salt infused with dried rose petals for a romantic, relaxing soak.','AED 89')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/bath-salts.jpeg" alt="Rose Blossom Bath Salt"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Rose Blossom</h3>
+              <p class="product-card-desc">Soothing bath salt with dried rose petals for a romantic, relaxing soak.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 89</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card fade-up" onclick="openProductModal('Jasmine Calm Bath Salt','Delicate jasmine-infused bath salt to calm the mind and soften the skin.','AED 89')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/bath-salts.jpeg" alt="Jasmine Calm Bath Salt"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Jasmine Calm</h3>
+              <p class="product-card-desc">Delicate jasmine-infused bath salt to calm the mind and soften the skin.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 89</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card fade-up" onclick="openProductModal('Lavender Dream Bath Salt','Relaxing lavender bath salt to ease tension and promote restful sleep.','AED 89')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/bath-salts.jpeg" alt="Lavender Dream Bath Salt"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Lavender Dream</h3>
+              <p class="product-card-desc">Relaxing lavender bath salt to ease tension and promote restful sleep.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 89</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-card fade-up" onclick="openProductModal('Citrus Bloom Bath Salt','Uplifting citrus bath salt with dried orange and marigold for an energizing soak.','AED 89')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/bath-salts.jpeg" alt="Citrus Bloom Bath Salt"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Citrus Bloom</h3>
+              <p class="product-card-desc">Uplifting citrus with dried orange and marigold for an energizing soak.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 89</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botanical Oils -->
+      <div class="product-panel" id="panel-botanicals">
+        <div class="product-grid">
+          <div class="product-card fade-up" onclick="openProductModal('Natural Oil — Botanicals & Crystals','A luxurious 30ml oil infused with real botanicals and amethyst crystals. Soft rituals for everyday magic.','AED 179')">
+            <div style="overflow:hidden"><img class="product-card-img" src="images/botanical-oil.jpeg" alt="Botanical Crystal Oil"></div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Botanicals & Crystals Oil</h3>
+              <p class="product-card-desc">A luxurious 30ml oil infused with real botanicals and amethyst crystals for radiant skin.</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">AED 179</span>
+                <button class="product-card-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ RITUAL ════════ -->
+  <section class="ritual" id="ritual">
+    <div class="container">
+      <div class="ritual-grid">
+        <div>
+          <p class="section-eyebrow fade-up">Your Daily Ritual</p>
+          <h2 class="section-title fade-up">The Art of <em>Self-Care</em></h2>
+          <p class="section-desc fade-up">Transform your daily routine into a moment of luxury with our three-step ritual rooted in centuries of Moroccan beauty tradition.</p>
+          <div class="ritual-steps">
+            <div class="ritual-step fade-up">
+              <span class="ritual-step-num">1</span>
+              <div>
+                <h4>Exfoliate</h4>
+                <p>Begin with a generous application of our body scrub on damp skin. Massage in circular motions to reveal smooth, radiant skin beneath.</p>
+              </div>
+            </div>
+            <div class="ritual-step fade-up">
+              <span class="ritual-step-num">2</span>
+              <div>
+                <h4>Soak</h4>
+                <p>Dissolve a handful of bath salts in warm water. Close your eyes, breathe deeply, and let the botanicals melt away the day's tension.</p>
+              </div>
+            </div>
+            <div class="ritual-step fade-up">
+              <span class="ritual-step-num">3</span>
+              <div>
+                <h4>Nourish</h4>
+                <p>Finish with a few drops of our argan hair oil or botanical face oil. Press gently into skin or hair, sealing in moisture and radiance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ritual-image fade-up">
+          <img src="images/model-hair-oil.jpeg" alt="Self-care ritual with Mera Bio">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ GIFT SETS ════════ -->
+  <section class="gifts" id="gifts">
+    <div class="container">
+      <div class="gifts-header fade-up">
+        <p class="section-eyebrow">Luxury Gifting</p>
+        <h2 class="section-title">The Perfect <em>Gift</em></h2>
+        <p class="section-desc">Beautifully presented in our signature transparent gift bag with gold accents — an unforgettable gesture for someone special.</p>
+      </div>
+      <div class="gifts-gallery">
+        <div class="gift-item fade-up">
+          <img src="images/gift-set-palace.jpeg" alt="Mera Bio Palace Gift Set">
+          <div class="gift-item-overlay">
+            <h4>The Royal Set</h4>
+            <p>Body scrub, perfume oil, bath bomb & more</p>
+            <a href="#contact" class="btn btn-gold">Inquire Now</a>
+          </div>
+        </div>
+        <div class="gift-item fade-up">
+          <img src="images/gift-set-beach.jpeg" alt="Mera Bio Beach Gift Set">
+          <div class="gift-item-overlay">
+            <h4>The Coastal Set</h4>
+            <p>Summer essentials in a luxurious presentation</p>
+            <a href="#contact" class="btn btn-gold">Inquire Now</a>
+          </div>
+        </div>
+        <div class="gift-item fade-up">
+          <img src="images/gift-set-mediterranean.jpeg" alt="Mera Bio Mediterranean Gift Set">
+          <div class="gift-item-overlay">
+            <h4>The Mediterranean Set</h4>
+            <p>Our signature collection with a coastal twist</p>
+            <a href="#contact" class="btn btn-gold">Inquire Now</a>
+          </div>
+        </div>
+        <div class="gift-item fade-up">
+          <img src="images/hero-gift-set.jpeg" alt="Mera Bio Ocean Gift Set">
+          <div class="gift-item-overlay">
+            <h4>The Ocean Set</h4>
+            <p>Argan & vanilla body scrub with botanicals</p>
+            <a href="#contact" class="btn btn-gold">Inquire Now</a>
+          </div>
+        </div>
+        <div class="gift-item fade-up">
+          <img src="images/gift-set-tropical.jpeg" alt="Mera Bio Tropical Gift Set">
+          <div class="gift-item-overlay">
+            <h4>The Tropical Set</h4>
+            <p>A beachside beauty escape</p>
+            <a href="#contact" class="btn btn-gold">Inquire Now</a>
+          </div>
+        </div>
+        <div class="gift-item fade-up">
+          <img src="images/botanical-oil.jpeg" alt="Mera Bio Crystal Oil Gift">
+          <div class="gift-item-overlay">
+            <h4>The Crystal Oil</h4>
+            <p>Botanicals & amethyst in a keepsake bottle</p>
+            <a href="#contact" class="btn btn-gold">Inquire Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ INGREDIENTS ════════ -->
+  <section class="ingredients" id="ingredients">
+    <div class="container">
+      <div class="ingredients-header fade-up">
+        <p class="section-eyebrow">Pure & Natural</p>
+        <h2 class="section-title">Our <em>Ingredients</em></h2>
+        <p class="section-desc">Every ingredient is hand-selected for its purity and potency. We believe in full transparency — nothing hidden, nothing synthetic.</p>
+      </div>
+      <div class="ingredients-grid">
+        <div class="ingredient-card fade-up">
+          <span class="ingredient-icon">🌿</span>
+          <h4>Argan Oil</h4>
+          <p>Cold-pressed from Moroccan argan trees, rich in vitamin E and fatty acids for deep hydration.</p>
+        </div>
+        <div class="ingredient-card fade-up">
+          <span class="ingredient-icon">🌹</span>
+          <h4>Damask Rose</h4>
+          <p>Hand-picked rose petals from the Valley of Roses, prized for their soothing and anti-aging properties.</p>
+        </div>
+        <div class="ingredient-card fade-up">
+          <span class="ingredient-icon">💜</span>
+          <h4>Lavender</h4>
+          <p>Calming French lavender to soothe the senses and nourish stressed skin with gentle healing.</p>
+        </div>
+        <div class="ingredient-card fade-up">
+          <span class="ingredient-icon">🍋</span>
+          <h4>Citrus Extracts</h4>
+          <p>Bright lemon and orange essentials to energize, brighten the complexion, and boost radiance.</p>
+        </div>
+        <div class="ingredient-card fade-up">
+          <span class="ingredient-icon">🔮</span>
+          <h4>Amethyst Crystals</h4>
+          <p>Charged crystals that infuse our botanical oils with calming, balancing energy for your skin.</p>
+        </div>
+        <div class="ingredient-card fade-up">
+          <span class="ingredient-icon">🌸</span>
+          <h4>Hibiscus</h4>
+          <p>The "botox plant" — naturally rich in AHAs to gently exfoliate and firm the skin.</p>
+        </div>
+        <div class="ingredient-card fade-up">
+          <span class="ingredient-icon">🥥</span>
+          <h4>Coconut Oil</h4>
+          <p>Deeply moisturizing and antibacterial, our organic coconut oil locks in lasting hydration.</p>
+        </div>
+        <div class="ingredient-card fade-up">
+          <span class="ingredient-icon">💙</span>
+          <h4>Blue Nila</h4>
+          <p>A precious Moroccan indigo powder traditionally used for detoxification and skin purification.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TESTIMONIALS ════════ -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="testimonials-header fade-up">
+        <p class="section-eyebrow">Love Letters</p>
+        <h2 class="section-title">What Our <em>Community</em> Says</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The argan hair oil has completely transformed my hair. It's softer, shinier, and the rose scent is absolutely divine. I use it every night."</p>
+          <p class="testimonial-author">Fatima A. — <span>Dubai, UAE</span></p>
+        </div>
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I gifted the Royal Set to my sister and she cried. The packaging is breathtaking and every product inside feels luxurious. True quality."</p>
+          <p class="testimonial-author">Sara M. — <span>Abu Dhabi, UAE</span></p>
+        </div>
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The Lavender Dream bath salt is my evening ritual now. After a long day, it melts away all the stress. My skin feels like silk afterward."</p>
+          <p class="testimonial-author">Nour K. — <span>Casablanca, Morocco</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ NEWSLETTER ════════ -->
+  <section class="newsletter" id="newsletter">
+    <div class="container">
+      <h2 class="section-title fade-up">Join the <em>Mera Bio</em> Family</h2>
+      <p class="section-desc fade-up">Be the first to know about new collections, exclusive offers, and self-care tips delivered to your inbox.</p>
+      <div class="newsletter-form fade-up">
+        <input type="email" class="newsletter-input" placeholder="Your email address" aria-label="Email address">
+        <button class="newsletter-btn" onclick="handleNewsletter()">Subscribe</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo">
+            <img src="images/logo.jpeg" alt="Mera Bio logo">
+            <span class="footer-logo-text">Mera Bio</span>
+          </a>
+          <p>Natural beauty inspired by Moroccan heritage. Handcrafted skincare that nourishes your body, soul, and the world around you.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">fb</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok">tk</a>
+            <a href="https://wa.me/" target="_blank" rel="noopener" aria-label="WhatsApp">wa</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="#products">Hair Oils</a></li>
+            <li><a href="#products">Body Scrubs</a></li>
+            <li><a href="#products">Bath Salts</a></li>
+            <li><a href="#products">Botanical Oils</a></li>
+            <li><a href="#gifts">Gift Sets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#ingredients">Ingredients</a></li>
+            <li><a href="#ritual">Rituals</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Support</h5>
+          <ul>
+            <li><a href="#" onclick="openContactModal(); return false;">Contact Us</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Mera Bio Natural Beauty. All rights reserved.</p>
+        <p>Crafted with ♡ in Morocco</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════ CONTACT MODAL ════════ -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeContactModal()">&times;</button>
+      <h3>Get in Touch</h3>
+      <p>Have a question, want to place a bulk order, or curious about our products? We'd love to hear from you.</p>
+      <div class="modal-form">
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <input type="tel" placeholder="Phone Number (optional)">
+        <textarea placeholder="Your Message"></textarea>
+        <button class="btn btn-gold" onclick="handleContact()" style="border-radius:2px;">Send Message</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ PRODUCT MODAL ════════ -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeProductModal()">&times;</button>
+      <h3 id="productModalTitle"></h3>
+      <p id="productModalDesc"></p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:#C5A455; font-weight:600; margin-bottom:20px;" id="productModalPrice"></p>
+      <div class="modal-form">
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <input type="tel" placeholder="Phone / WhatsApp">
+        <button class="btn btn-gold" onclick="handleOrder()" style="border-radius:2px;">Order via WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ BACK TO TOP ════════ -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    // ── Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+      const btn = document.getElementById('backToTop');
+      btn.classList.toggle('show', window.scrollY > 600);
+    });
+
+    // ── Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // ── Product tabs
+    document.querySelectorAll('.product-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.product-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+        // Re-trigger fade animations for newly visible cards
+        document.getElementById('panel-' + tab.dataset.tab).querySelectorAll('.fade-up').forEach(el => {
+          el.classList.remove('visible');
+          setTimeout(() => observer.observe(el), 50);
+        });
+      });
+    });
+
+    // ── Intersection Observer for fade-up
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Modals
+    function openContactModal() {
+      document.getElementById('contactModal').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeContactModal() {
+      document.getElementById('contactModal').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    function openProductModal(name, desc, price) {
+      document.getElementById('productModalTitle').textContent = name;
+      document.getElementById('productModalDesc').textContent = desc;
+      document.getElementById('productModalPrice').textContent = price;
+      document.getElementById('productModal').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeProductModal() {
+      document.getElementById('productModal').classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    // Close modals on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove('show');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
+    // Close modals on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.show').forEach(m => {
+          m.classList.remove('show');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+
+    // ── Form handlers
+    function handleNewsletter() {
+      const input = document.querySelector('.newsletter-input');
+      if (input.value && input.value.includes('@')) {
+        alert('Thank you for subscribing to Mera Bio! ✨');
+        input.value = '';
+      } else {
+        alert('Please enter a valid email address.');
+      }
+    }
+
+    function handleContact() {
+      alert('Thank you for your message! Our team will get back to you within 24 hours. ✨');
+      closeContactModal();
+    }
+
+    function handleOrder() {
+      const name = document.getElementById('productModalTitle').textContent;
+      const msg = encodeURIComponent('Hi! I would like to order: ' + name);
+      window.open('https://wa.me/?text=' + msg, '_blank');
+      closeProductModal();
+    }
+  </script>
+
+</body>
+</html>
