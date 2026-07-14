@@ -26,6 +26,8 @@
     }
 
     html { scroll-behavior: smooth; }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
     body {
       font-family: 'Jost', sans-serif;
@@ -1211,7 +1213,7 @@
             <label style="font-size:0.85rem;color:var(--text-muted);white-space:nowrap;" data-en="Quantity:" data-ar="الكمية:">Quantity:</label>
             <div style="display:flex;align-items:center;">
               <button type="button" onclick="changeQty(-1)" style="width:40px;height:40px;border:1.5px solid var(--cream-dark);background:var(--white);font-size:1.2rem;cursor:pointer;border-radius:2px 0 0 2px;color:var(--text-dark);font-weight:600;line-height:1;">&minus;</button>
-              <input type="number" id="orderQty" value="1" min="1" max="99" style="width:50px;height:40px;text-align:center;border-top:1.5px solid var(--cream-dark);border-bottom:1.5px solid var(--cream-dark);border-left:none;border-right:none;font-family:'Jost',sans-serif;font-size:0.95rem;outline:none;color:var(--text-dark);-moz-appearance:textfield;appearance:textfield;">
+              <input type="number" id="orderQty" value="1" min="1" max="99" style="width:50px;height:40px;text-align:center;border-top:1.5px solid var(--cream-dark);border-bottom:1.5px solid var(--cream-dark);border-left:none;border-right:none;font-family:'Jost',sans-serif;font-size:1.1rem;outline:none;color:#1A1A1A;background:#FFFFFF;-moz-appearance:textfield;-webkit-appearance:none;appearance:textfield;font-weight:600;">
               <button type="button" onclick="changeQty(1)" style="width:40px;height:40px;border:1.5px solid var(--cream-dark);background:var(--white);font-size:1.2rem;cursor:pointer;border-radius:0 2px 2px 0;color:var(--text-dark);font-weight:600;line-height:1;">+</button>
             </div>
           </div>
