@@ -221,14 +221,18 @@
         <div class="label-section-title">📦 Order Details</div>
         <div class="label-product" id="lblProduct"></div>
         <div class="label-row">
-          <span class="label-key">Quantity</span>
-          <span class="label-val" id="lblQty"></span>
-        </div>
-        <div class="label-row">
-          <span class="label-key">Price</span>
+          <span class="label-key">Unit Price</span>
           <span class="label-val" id="lblPrice"></span>
         </div>
         <div class="label-row">
+          <span class="label-key">Quantity</span>
+          <span class="label-val" id="lblQty"></span>
+        </div>
+        <div class="label-row" style="padding-top:8px;margin-top:6px;border-top:1px dashed #d8d0c4;">
+          <span class="label-key" style="font-weight:600;color:#1a1a1a;font-size:0.85rem;">Total</span>
+          <span class="label-val" style="font-weight:700;color:#4A5530;font-size:0.95rem;" id="lblTotal"></span>
+        </div>
+        <div class="label-row" style="margin-top:4px;">
           <span class="label-key">Date</span>
           <span class="label-val" id="lblDate"></span>
         </div>
@@ -267,8 +271,9 @@
     document.getElementById('lblEmail').textContent = params.get('email') || 'N/A';
     document.getElementById('lblAddress').textContent = params.get('address') || '—';
     document.getElementById('lblProduct').textContent = params.get('product') || '—';
-    document.getElementById('lblQty').textContent = params.get('qty') || '1';
+    document.getElementById('lblQty').textContent = 'x ' + (params.get('qty') || '1');
     document.getElementById('lblPrice').textContent = params.get('price') || '—';
+    document.getElementById('lblTotal').textContent = params.get('total') || params.get('price') || '—';
     document.getElementById('lblDate').textContent = params.get('date') || '—';
 
     const notes = params.get('notes');

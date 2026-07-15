@@ -1562,7 +1562,7 @@
 
       // Build label URL
       const labelParams = new URLSearchParams({
-        id: orderId, name, phone, email, address, product, qty: qty.toString(), price, notes, date
+        id: orderId, name, phone, email, address, product, qty: qty.toString(), price, total: 'AED ' + total.toFixed(0), notes, date
       });
       const labelUrl = `https://mywebsiite.github.io/MeraBio/label.html?${labelParams.toString()}`;
 
